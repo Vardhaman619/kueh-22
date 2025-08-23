@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@theme {
+  --color-green: #0e9a61;
+  --font-sans: var(--font-primary);
+  --color-brown: hsl(19 34.7% 28.2%);
+  --color-orange: hsl(25.16 62.75% 48.43%);
+  --shadow-custom: 7px 7px var(--color-green);
+}

@@ -1,16 +1,287 @@
 ---
+import { Picture } from "astro:assets";
+import Layout from "../layout/Layout.astro";
+import BannerImage from "../assets/banner-image.jpg";
+import Spnsor1Image from "../assets/sponsor-1.png";
+import Spnsor2Image from "../assets/sponsor-2.png";
+import Spnsor3Image from "../assets/sponsor-3.png";
+import Spnsor4Image from "../assets/sponsor-4.png";
+import Spnsor5Image from "../assets/sponsor-5.png";
+import Spnsor6Image from "../assets/sponsor-6.png";
+import Spnsor7Image from "../assets/sponsor-7.png";
+import Spnsor8Image from "../assets/sponsor-8.png";
+import Spnsor9Image from "../assets/sponsor-9.png";
+import { Icon } from "astro-icon/components";
+const SECTION_LINKS = [
+  {
+    name: "Event Details",
+    id: "event-details",
+  },
+  {
+    name: "Registration",
+    id: "registration",
+  },
+  {
+    name: "Resources",
+    id: "resources",
+  },
+  {
+    name: "FAQ",
+    id: "faq",
+  },
+];
+const sponsors = [
+  {
+    image: Spnsor1Image,
+    link: "https://mages.edu.sg/",
+    name: "Mages",
+  },
+  {
+    image: Spnsor2Image,
+    link: "https://www.twitch.tv/",
+    name: "Twitch",
+  },
+  {
+    image: Spnsor3Image,
+    link: "https://www.theiterative.co/",
+    name: "The Interative",
+  },
+  {
+    image: Spnsor4Image,
+    link: "https://unity.com/",
+    name: "Unity",
+  },
+  {
+    image: Spnsor5Image,
+    link: "https://www.xbox.com/en-SG/",
+    name: "XBox",
+  },
+  {
+    image: Spnsor9Image,
+    link: "https://www.sgga.org.sg/",
+    name: "Sgga",
+  },
+  {
+    image: Spnsor6Image,
+    link: "https://www.linkedin.com/company/mile3-incubator",
+    name: "Mile3",
+  },
+  {
+    image: Spnsor7Image,
+    link: "https://habby.com/",
+    name: "Habby",
+  },
 
+  {
+    image: Spnsor8Image,
+    link: "https://www.scape.sg/",
+    name: "Scape",
+  },
+];
+const REGISTRATION_STEPS = [
+  { text: "Register & Join our Global Game", link: "https://discord.com/" },
+  {
+    text: "Register through our registration form",
+    link: "https://discord.com/",
+  },
+  { text: "Join our Discord!", link: "https://discord.com/" },
+];
+const FAQ = [
+  {
+    question: "Is the question 1?",
+    answer: "Yes. It is indeed question 1.",
+  },
+  {
+    question: "Is the question 1?",
+    answer: "Yes. It could be question 2.",
+  },
+  {
+    question: "Is the question 1?",
+    answer: "Uhh..maybe?",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main
+    class="container mx-auto rounded-4xl bg-white py-8 px-4 md:px-10 xl:px-20 max-w-7xl w-[calc(100%_-_32px)] xl:w-full"
+  >
+    <section class="text-center pt-10 md:pt-20 pb-10">
+      <h1 class="font-semibold text-6xl md:text-7xl 2xl:text-8xl text-balance">
+        Celebrate gamedev with <span class="text-orange">Kueh 22.</span>
+      </h1>
+      <nav class="mt-14 grid sm:grid-cols-2 md:flex gap-x-5 gap-y-6 md:gap-x-8">
+        {
+          SECTION_LINKS.map((link) => (
+            <a
+              href={"#" + link.id}
+              class="outline-2 outline-brown/50 hover:outline-brown text-lg hover:shadow-custom transition ease-in-out flex-1 h-12 grid place-items-center font-medium"
+            >
+              {link.name}
+            </a>
+          ))
+        }
+      </nav>
+    </section>
+    <hr class="bg-zinc-400/50 text-white w-[80%] mx-auto rounded-full h-2" />
+
+    <section id={SECTION_LINKS[0].id} class="py-12">
+      <h2
+        class="text-5xl lg:text-6xl font-semibold text-orange text-center my-8"
+      >
+        Event Details
+      </h2>
+      <div class="min-w-0 w-full flex max-w-7xl">
+        <Picture src={BannerImage} loading={"eager"} alt="banner" />
+      </div>
+      <div class="py-16">
+        <h3
+          class="underline text-3xl lg:text-4xl pb-10 underline-offset-6 font-semibold text-center"
+        >
+          Event Name
+        </h3>
+        <address
+          class="not-italic text-xl sm:text-2xl mb-3 text-center md:text-left"
+        >
+          <b>Venue:</b>
+          <span>ABC DBDD JNKSKJNSJ</span>
+        </address>
+        <div class="text-xl sm:text-2xl text-center md:text-left">
+          <b>Date:</b>
+          <span>
+            <span class="sr-only">Starts From</span>
+            <time datetime={new Date(2001, 1, 1).toISOString()}>01/01/2000</time
+            >
+            <span aria-hidden="true" class="not-sr-only">-</span>
+            <span class="sr-only">To</span>
+            <time datetime={new Date(2001, 1, 5).toISOString()}>05/01/2000</time
+            >
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3
+        class="underline text-3xl lg:text-4xl underline-offset-2 font-semibold text-center"
+      >
+        Sponsors
+      </h3>
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-x-[10vw] sm:gap-x-12 gap-y-12 sm:gap-y-12 py-10 place-items-center"
+      >
+        {
+          sponsors.map((sponsor, i) => (
+            <a
+              href={sponsor.link}
+              class:list={[
+                {
+                  "col-span-2 sm:col-span-1 grid place-items-center sm:block":
+                    i == sponsors.length - 1,
+                },
+              ]}
+            >
+              <Picture
+                pictureAttributes={{
+                  "class:list": [
+                    {
+                      "w-1/2 sm:w-full": i == sponsors.length - 1,
+                    },
+                  ],
+                }}
+                src={sponsor.image}
+                alt={sponsor.name}
+              />
+              <h4 class="sr-only">{sponsor.name}</h4>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+    <hr
+      class="bg-zinc-400/50 text-white w-[80%] mt-10 mx-auto rounded-full h-2"
+    />
+    <section class="pt-20" id={SECTION_LINKS[1].id}>
+      <h2
+        class="text-center text-5xl lg:text-6xl text-orange font-semibold pb-12"
+      >
+        Registration
+      </h2>
+      {
+        REGISTRATION_STEPS.map((step, i) => (
+          <div class="mb-6 sm:w-fit rounded-full bg-brown mx-auto">
+            <a
+              href={step.link}
+              class="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-2 transition-transform hover:-rotate-2 flex-col sm:flex-row justify-center gap-y-3"
+            >
+              <span
+                class:list={[
+                  "rounded-full p-2 px-4 font-medium shrink-0",
+                  {
+                    "bg-green text-white": i == 0,
+                    "bg-orange text-black": i == 1,
+                    "bg-violet-600 text-white": i == 2,
+                  },
+                ]}
+              >
+                STEP {i + 1}
+              </span>
+              <span class="px-2 flex flex-col sm:flex-row text-center items-center gap-x-2 gap-y-2.5 text-lg">
+                {step.text}
+                <Icon name="arrow-up-right" class="text-2xl shrink-0" />
+              </span>
+            </a>
+          </div>
+        ))
+      }
+    </section>
+    <hr
+      class="bg-zinc-400/50 mt-20 text-white w-[80%] mx-auto rounded-full h-2"
+    />
+    <section id={SECTION_LINKS[SECTION_LINKS.length - 1].id} class="py-14">
+      <h2
+        class="text-center text-5xl lg:text-6xl text-orange font-semibold pb-6"
+      >
+        FAQ
+      </h2>
+      <div class="max-w-2xl mx-auto mt-5 flex flex-col gap-y-4">
+        {
+          FAQ.map((faq) => (
+            <details class="border-b-2 open:border-brown border-brown/20 pb-4 group">
+              <summary class="flex justify-between py-2 items-end font-semibold">
+                {faq.question}
+                <Icon
+                  name={"chevron-down"}
+                  class={"text-xl transition group-open:rotate-180"}
+                />
+              </summary>
+              {faq.answer}
+            </details>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  details {
+    interpolate-size: allow-keywords;
+  }
+  details::details-content {
+    opacity: 0;
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      content-visibility 250ms allow-discrete,
+      opacity 200ms,
+      block-size 200ms;
+  }
+  details[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+  }
+</style>
