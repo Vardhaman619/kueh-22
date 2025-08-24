@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  images: CollectionEntry<"pastRun">["data"]["gallery"];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="image-gallery mb-12 overflow-hidden">
+  <div class="embla" id="imageGallery">
+    <div class="embla__container">
+      {
+        images &&
+          images.map((image, index) => (
+            <div class="embla__slide relative cursor-grab">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                class="w-full object-cover rounded-lg brightness-50 md:brightness-75 aspect-video"
+                loading={index == 0 ? "eager" : "lazy"}
+                fetchpriority={index == 0 ? "high" : "auto"}
+              />
+              {image.caption && (
+                <p class="text-center text-2xl md:text-4xl text-white mx-auto w-full mt-2 absolute bottom-6 lg:bottom-14 font-medium lg:font-semibold max-w-prose block px-5">
+                  {image.caption}
+                </p>
+              )}
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .embla {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  .embla__container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    margin-left: 2rem;
+  }
+</style>
+<script>
+  import EmblaCarousel from "embla-carousel";
+  import Autoplay from "embla-carousel-autoplay";
+  document.addEventListener("astro:page-load", () => {
+    // Initialize Image Gallery Carousel
+    const imageGalleryNode = document.getElementById("imageGallery");
+    if (imageGalleryNode && typeof EmblaCarousel !== "undefined") {
+      const imageGallery = EmblaCarousel(
+        imageGalleryNode,
+        {
+          loop: true,
+          align: "center",
+        },
+        [
+          Autoplay({
+            stopOnInteraction: false,
+            stopOnFocusIn: false,
+          }),
+        ]
+      );
+    }
+  });
+</script>

@@ -132,7 +132,12 @@ const FAQ = [
         Event Details
       </h2>
       <div class="min-w-0 w-full flex max-w-7xl">
-        <Picture src={BannerImage} loading={"eager"} alt="banner" />
+        <Picture
+          src={BannerImage}
+          loading={"eager"}
+          alt="Event Banner"
+          widths={[560, 1120, 2240]}
+        />
       </div>
       <div class="py-16">
         <h3
@@ -189,8 +194,9 @@ const FAQ = [
                     },
                   ],
                 }}
+                widths={[250, 300, 500]}
                 src={sponsor.image}
-                alt={sponsor.name}
+                alt={sponsor.name + " Logo"}
               />
               <h4 class="sr-only">{sponsor.name}</h4>
             </a>
@@ -218,7 +224,7 @@ const FAQ = [
                 class:list={[
                   "rounded-full p-2 px-4 font-medium shrink-0",
                   {
-                    "bg-green text-white": i == 0,
+                    "bg-emerald-800 text-white": i == 0,
                     "bg-orange text-black": i == 1,
                     "bg-violet-600 text-white": i == 2,
                   },

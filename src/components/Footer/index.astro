@@ -4,44 +4,44 @@ const LINKS = [
   {
     text: "Instagram",
     icon: "instagram",
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/globalgamejam.sg/",
   },
   {
     text: "Discord",
     icon: "discord",
-    link: "https://www.discord.com/",
+    link: "https://discord.gg/HPByVHBzaC",
   },
 
   {
     text: "telegram",
     icon: "telegram",
-    link: "https://www.telegram.com/",
+    link: "https://t.me/GameJamSG",
   },
   {
     text: "Youtube",
     icon: "youtube",
-    link: "https://www.youtube.com/",
+    link: "https://www.youtube.com/@ggjsg",
   },
   {
     text: "Tiktok",
     icon: "tiktok",
-    link: "https://www.tiktok.com/",
+    link: "https://www.tiktok.com/@ggjsingapore",
   },
 
   {
     text: "Facebook",
     icon: "facebook",
-    link: "https://www.facebook.com/",
+    link: "https://www.facebook.com/profile.php?id=61554799861985",
   },
   {
     text: "Linkedin",
     icon: "linkedin",
-    link: "https://www.linkedin.com/",
+    link: "https://www.linkedin.com/company/kueh-22",
   },
   {
     text: "Linktree",
     icon: "linktree",
-    link: "https://linktr.ee/",
+    link: "https://linktr.ee/ggjsg?fbclid=PAZXh0bgNhZW0CMTEAAaYqZFBYQ5F4hpvCzMAe91wH_bdIAHv3pQunzW2hE5hlWE_CDPlea9CDPGA_aem_HJPnTx-VsZcyxwtzI0PpqA",
   },
 ];
 ---
@@ -66,6 +66,7 @@ const LINKS = [
             "bg-blue-600 text-white": link.icon == "linkedin",
           },
         ]}
+        aria-label={link.text}
       >
         <div class="size-10 place-items-center grid text-3xl">
           <Icon name={link.icon} />

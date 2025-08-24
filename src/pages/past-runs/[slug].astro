@@ -1,6 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layout/Layout.astro";
+import ImageGallery from "../../components/ImageGallery/index.astro";
+import GamesCarousel from "../../components/GamesCarousel/index.astro";
+import type { CollectionEntry } from "astro:content";
 export async function getStaticPaths() {
   const pastRuns = await getCollection("pastRun");
   return pastRuns.map((run) => ({
@@ -8,14 +11,32 @@ export async function getStaticPaths() {
     props: { run },
   }));
 }
+interface Props {
+  run: CollectionEntry<"pastRun">;
+}
+
+const { run } = Astro.props;
+const { gallery, games } = run.data;
 ---
 
 <Layout>
   <main
-    class="container mx-auto rounded-4xl bg-white py-8 px-4 md:px-10 xl:px-20 max-w-7xl w-[calc(100%_-_32px)] xl:w-full"
+    class="container mx-auto rounded-4xl bg-white py-8 px-4 md:px-10 xl:px-20 lg:pt-14 max-w-7xl w-[calc(100%_-_32px)] xl:w-full"
   >
-    <h1 class="text-center text-5xl md:text-6xl">
-      Past Run - <span class="text-orange font-bold">2025</span>
+    <h1 class="text-center text-5xl md:text-6xl font-semibold">
+      Past Run - <span class="text-orange">2025</span>
     </h1>
+    <section class="pt-12 pb-6">
+      <ImageGallery images={gallery ?? []} />
+    </section>
+    <hr class="bg-zinc-400/50 text-white w-[80%] mx-auto rounded-full h-2" />
+    <section class="py-14 md:py-20">
+      <h2
+        class="text-center text-5xl md:text-6xl text-orange font-semibold mb-6"
+      >
+        Games
+      </h2>
+      <GamesCarousel games={games} />
+    </section>
   </main>
 </Layout>
