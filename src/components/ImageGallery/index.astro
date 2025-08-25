@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
@@ -9,8 +10,8 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<div class="image-gallery mb-12 overflow-hidden">
-  <div class="embla" id="imageGallery">
+<div class="mb-12 relative" id="image-gallery-parent">
+  <div class="embla overflow-hidden" id="imageGallery">
     <div class="embla__container">
       {
         images &&
@@ -33,6 +34,18 @@ const { images } = Astro.props;
       }
     </div>
   </div>
+  <button
+    class="embla__prev absolute -left-3 md:-left-6 lg:-left-10 xl:-left-16 top-1/2 -translate-y-1/2 bg-white cursor-pointer hover:text-white transition text-xl md:text-3xl rounded-full size-10 md:size-12 hover:bg-brown grid place-items-center shadow-lg z-10 disabled:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
+    aria-label="Prev Slide"
+  >
+    <Icon name="chevron-left" />
+  </button>
+  <button
+    class="embla__next absolute -right-3 md:-right-6 lg:-right-10 xl:-right-16 top-1/2 -translate-y-1/2 bg-white cursor-pointer hover:text-white text-xl md:text-3xl rounded-full size-10 transition md:size-12 hover:bg-brown grid place-items-center shadow-lg z-10 disabled:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
+    aria-label="Next Slide"
+  >
+    <Icon name="chevron-right" />
+  </button>
 </div>
 
 <style>
@@ -56,11 +69,18 @@ const { images } = Astro.props;
 <script>
   import EmblaCarousel from "embla-carousel";
   import Autoplay from "embla-carousel-autoplay";
+import { addPrevNextBtnsClickHandlers } from "../../lib/embla";
+
   document.addEventListener("astro:page-load", () => {
+    const imageGalleryParent = document.querySelector<HTMLElement>(
+      "#image-gallery-parent",
+    )!;
+    const prevBtn = imageGalleryParent.querySelector<HTMLElement>(".embla__prev");
+    const nextBtn = imageGalleryParent.querySelector<HTMLElement>(".embla__next");
     // Initialize Image Gallery Carousel
     const imageGalleryNode = document.getElementById("imageGallery");
     if (imageGalleryNode && typeof EmblaCarousel !== "undefined") {
-      const imageGallery = EmblaCarousel(
+      const embla = EmblaCarousel(
         imageGalleryNode,
         {
           loop: true,
@@ -70,9 +90,17 @@ const { images } = Astro.props;
           Autoplay({
             stopOnInteraction: false,
             stopOnFocusIn: false,
+            delay:5000
           }),
-        ]
+        ],
       );
+      const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
+        embla,
+        prevBtn!,
+        nextBtn!
+      );
+
+      embla.on("destroy", removePrevNextBtnsClickHandlers);
     }
   });
 </script>
